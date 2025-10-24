@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialConnect - Connect with Friends</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login-container" class="login-container">
+        <div class="login-box">
+            <div class="language-selector">
+                <button id="lang-en" class="lang-btn active">EN</button>
+                <button id="lang-az" class="lang-btn">AZ</button>
+            </div>
+            <h1 data-translate="app_title">SocialConnect</h1>
+            <form id="login-form">
+                <input type="text" id="username" data-translate-placeholder="username" placeholder="Username" required>
+                <input type="password" id="password" data-translate-placeholder="password" placeholder="Password" required>
+                <button type="submit" data-translate="login">Login</button>
+            </form>
+            <div id="login-error" class="error-message"></div>
+        </div>
+    </div>
+
+    <div id="main-app" class="main-app hidden">
+        <header class="header">
+            <div class="header-content">
+                <h1 data-translate="app_title">SocialConnect</h1>
+                <div class="user-info">
+                    <div class="language-selector">
+                        <button id="lang-en-main" class="lang-btn active">EN</button>
+                        <button id="lang-az-main" class="lang-btn">AZ</button>
+                    </div>
+                    <span id="current-user">xaker</span>
+                    <button id="logout-btn" data-translate="logout">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <aside class="sidebar">
+                <div class="menu-section">
+                    <h3 data-translate="navigation">Navigation</h3>
+                    <button class="menu-btn active" data-section="feed" data-translate="feed">Feed</button>
+                    <button class="menu-btn" data-section="search" data-translate="search">Search</button>
+                    <button class="menu-btn" data-section="chat" data-translate="chat">Chat</button>
+                    <button class="menu-btn" data-section="profile" data-translate="profile">Profile</button>
+                    <button class="menu-btn" data-section="tools" data-translate="tools">Tools</button>
+                    <button class="menu-btn" data-section="learn" data-translate="learn_xss">Learn XSS</button>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <div id="feed-section" class="content-section">
+                    <div class="post-composer">
+                        <h3 data-translate="whats_on_mind">What's on your mind?</h3>
+                        <textarea id="post-content" data-translate-placeholder="share_thoughts" placeholder="Share your thoughts..."></textarea>
+                        <button id="post-btn" data-translate="post">Post</button>
+                    </div>
+                    <div id="posts-container"></div>
+                </div>
+
+                <div id="search-section" class="content-section hidden">
+                    <h3 data-translate="search_users">Search Users</h3>
+                    <div class="search-container">
+                        <input type="text" id="search-input" data-translate-placeholder="search_users_placeholder" placeholder="Search for users...">
+                        <button id="search-btn" data-translate="search">Search</button>
+                    </div>
+                    <div id="search-results"></div>
+                </div>
+
+                <div id="chat-section" class="content-section hidden">
+                    <h3 data-translate="chat">Chat</h3>
+                    <div class="chat-container">
+                        <div id="chat-messages"></div>
+                        <div class="chat-input-container">
+                            <input type="text" id="chat-input" data-translate-placeholder="type_message" placeholder="Type a message...">
+                            <button id="send-btn" data-translate="send">Send</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="profile-section" class="content-section hidden">
+                    <h3 data-translate="profile_settings">Profile Settings</h3>
+                    <div class="profile-form">
+                        <div class="form-group">
+                            <label for="display-name" data-translate="display_name">Display Name:</label>
+                            <input type="text" id="display-name" value="xaker">
+                            <button id="update-name-btn" data-translate="update_name">Update Name</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="bio" data-translate="bio">Bio:</label>
+                            <textarea id="bio" data-translate-placeholder="bio_placeholder" placeholder="Tell us about yourself..."></textarea>
+                            <button id="update-bio-btn" data-translate="update_bio">Update Bio</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tools-section" class="content-section hidden">
+                    <h3 data-translate="xss_testing_tools">XSS Testing Tools</h3>
+                    <div class="tools-container">
+                        <div class="tool-item">
+                            <h4 data-translate="basic_alert">Basic Alert</h4>
+                            <p data-translate="basic_alert_desc">Simple alert popup</p>
+                            <code>&lt;script&gt;alert(1)&lt;/script&gt;</code>
+                        </div>
+                        <div class="tool-item">
+                            <h4 data-translate="cookie_stealer">Cookie Stealer</h4>
+                            <p data-translate="cookie_stealer_desc">Steal cookies from current session</p>
+                            <code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;</code>
+                        </div>
+                        <div class="tool-item">
+                            <h4 data-translate="image_xss">Image XSS</h4>
+                            <p data-translate="image_xss_desc">XSS using image tag</p>
+                            <code>&lt;img src=x onerror=alert(1)&gt;</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="learn-section" class="content-section hidden">
+                    <h3 data-translate="learn_xss_from_scratch">Learn XSS from Scratch</h3>
+                    <div class="learn-container">
+                        <div class="learn-section">
+                            <h4 data-translate="what_is_html">What is HTML?</h4>
+                            <p data-translate="html_description">HTML (HyperText Markup Language) is the standard markup language for creating web pages. It uses tags to structure content:</p>
+                            <div class="html-demo">
+                                <div class="html-demo-left">
+                                    <h5 data-translate="html_code">HTML Code:</h5>
+                                    <div class="code-example">
+                                        <code>&lt;h1&gt;Hello World&lt;/h1&gt;</code>
+                                        <code>&lt;p&gt;This is a paragraph&lt;/p&gt;</code>
+                                        <code>&lt;img src="image.jpg" alt="Description"&gt;</code>
+                                    </div>
+                                </div>
+                                <div class="html-demo-right">
+                                    <h5 data-translate="html_result">Result:</h5>
+                                    <div class="html-preview">
+                                        <h1 style="color: #333; margin: 0; font-size: 1.5rem;">Hello World</h1>
+                                        <p style="color: #666; margin: 0.5rem 0;">This is a paragraph</p>
+                                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiB2aWV3Qm94PSIwIDAgMTAwIDUwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAiIGhlaWdodD0iNTAiIGZpbGw9IiNmOGY5ZmEiLz48dGV4dCB4PSI1MCIgeT0iMzAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzY2NiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SW1hZ2U8L3RleHQ+PC9zdmc+" alt="Description" style="width: 100px; height: 50px; border: 1px solid #ddd; border-radius: 4px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="learn-section">
+                            <h4 data-translate="what_is_javascript">What is JavaScript?</h4>
+                            <p data-translate="javascript_description">JavaScript is a programming language that runs in web browsers. It can manipulate HTML elements and perform actions:</p>
+                            <div class="js-demo">
+                                <div class="js-demo-left">
+                                    <h5 data-translate="javascript_code">JavaScript Code:</h5>
+                                    <div class="code-example">
+                                        <code>alert("Hello World");</code>
+                                        <code>document.getElementById("myDiv").innerHTML = "New content";</code>
+                                        <code>console.log("Debug message");</code>
+                                    </div>
+                                    <button id="run-js-btn" class="run-btn" data-translate="run_code">Run Code</button>
+                                </div>
+                                <div class="js-demo-right">
+                                    <h5 data-translate="terminal_output">Terminal Output:</h5>
+                                    <div class="terminal">
+                                        <div class="terminal-header">
+                                            <div class="terminal-buttons">
+                                                <span class="terminal-btn red"></span>
+                                                <span class="terminal-btn yellow"></span>
+                                                <span class="terminal-btn green"></span>
+                                            </div>
+                                            <span class="terminal-title">JavaScript Console</span>
+                                        </div>
+                                        <div class="terminal-body">
+                                            <div id="terminal-output">
+                                                <div class="terminal-line">
+                                                    <span class="terminal-prompt">></span>
+                                                    <span class="terminal-text">Ready to execute JavaScript...</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="learn-section">
+                            <h4 data-translate="what_is_xss">What is XSS?</h4>
+                            <p data-translate="xss_description">Cross-Site Scripting (XSS) occurs when a web application includes untrusted data in a web page without proper validation or escaping. This allows attackers to execute malicious scripts in the victim's browser.</p>
+                        </div>
+
+                        <div class="learn-section">
+                            <h4 data-translate="how_xss_works">How XSS Works</h4>
+                            <p data-translate="xss_step1">1. Attacker injects malicious script into a vulnerable input field</p>
+                            <p data-translate="xss_step2">2. The script gets stored or reflected back to users</p>
+                            <p data-translate="xss_step3">3. When other users view the page, the script executes in their browser</p>
+                            <p data-translate="xss_step4">4. The script can steal cookies, redirect users, or perform other malicious actions</p>
+                        </div>
+
+                        <div class="learn-section">
+                            <h4 data-translate="types_of_xss">Types of XSS</h4>
+                            <div class="xss-types">
+                                <div class="xss-type">
+                                    <h5 data-translate="stored_xss">Stored XSS</h5>
+                                    <p data-translate="stored_xss_desc">Malicious script is permanently stored on the server (like in a comment or post)</p>
+                                </div>
+                                <div class="xss-type">
+                                    <h5 data-translate="reflected_xss">Reflected XSS</h5>
+                                    <p data-translate="reflected_xss_desc">Malicious script is reflected back immediately (like in search results)</p>
+                                </div>
+                                <div class="xss-type">
+                                    <h5 data-translate="dom_xss">DOM-based XSS</h5>
+                                    <p data-translate="dom_xss_desc">Vulnerability exists in client-side code that manipulates the DOM</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="learn-section">
+                            <h4 data-translate="common_xss_payloads">Common XSS Payloads</h4>
+                            <div class="payload-examples">
+                                <div class="payload-item">
+                                    <h5 data-translate="basic_alert">Basic Alert</h5>
+                                    <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code>
+                                    <p data-translate="basic_alert_payload_desc">Shows a popup alert - good for testing if XSS is possible</p>
+                                </div>
+                                <div class="payload-item">
+                                    <h5 data-translate="cookie_theft">Cookie Theft</h5>
+                                    <code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;</code>
+                                    <p data-translate="cookie_theft_desc">Displays all cookies - can be used to steal session tokens</p>
+                                </div>
+                                <div class="payload-item">
+                                    <h5 data-translate="image_xss">Image XSS</h5>
+                                    <code>&lt;img src=x onerror=alert('XSS')&gt;</code>
+                                    <p data-translate="image_xss_payload_desc">Uses image tag with onerror event - bypasses script tag filters</p>
+                                </div>
+                                <div class="payload-item">
+                                    <h5 data-translate="redirect">Redirect</h5>
+                                    <code>&lt;script&gt;window.location='http://evil.com'&lt;/script&gt;</code>
+                                    <p data-translate="redirect_desc">Redirects user to malicious website</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="learn-section">
+                            <h4 data-translate="how_to_test_xss">How to Test for XSS</h4>
+                            <ol>
+                                <li data-translate="test_step1">Find input fields that display data back to users</li>
+                                <li data-translate="test_step2">Try basic payloads like:</li>
+                                <div class="code-example" style="margin: 0.5rem 0;">
+                                    <code>&lt;script&gt;alert(1)&lt;/script&gt;</code>
+                                </div>
+                                <li data-translate="test_step3">If you see an alert popup, the site is vulnerable</li>
+                                <li data-translate="test_step4">Try different payloads to bypass filters</li>
+                                <li data-translate="test_step5">Test if you can steal cookies or redirect users</li>
+                            </ol>
+                        </div>
+
+                        <div class="learn-section">
+                            <h4 data-translate="practice_areas">Practice Areas in This Lab</h4>
+                            <ul>
+                                <li data-translate="practice_posts"><strong>Posts:</strong> Try XSS in the post content area</li>
+                                <li data-translate="practice_chat"><strong>Chat:</strong> Send XSS payloads in chat messages</li>
+                                <li data-translate="practice_search"><strong>Search:</strong> Use XSS in search queries</li>
+                                <li data-translate="practice_profile"><strong>Profile:</strong> Try XSS in the name field</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
